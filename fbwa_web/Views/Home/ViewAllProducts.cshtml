@@ -1,0 +1,32 @@
+﻿@model fbwa_web.Models.ViewAllProductsViewModel
+
+@{
+    ViewBag.Title = "Tất cả sản phẩm - " + Model.Category.CategoryName;
+}
+
+<h1>@Model.Category.CategoryName</h1>
+
+<div class="product-list">
+    @foreach (var product in Model.Products)
+    {
+        <div class="product-item">
+            <h4>@product.ProductName</h4>
+            <p>@product.Description</p>
+            <p>Giá: @product.Price.ToString("C")</p>
+        </div>
+    }
+</div>
+
+<style>
+    .product-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .product-item {
+        width: 20%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        margin: 5px;
+    }
+</style>

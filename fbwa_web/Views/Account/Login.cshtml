@@ -1,0 +1,110 @@
+﻿@model fbwa_web.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = null; // Không sử dụng layout chung để toàn quyền kiểm soát thiết kế của trang đăng nhập
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Thiết kế nền và bố cục trang */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f8fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #1da1f2;
+        }
+
+        .form-group label {
+            display: block;
+            text-align: left;
+            color: #657786;
+            font-size: 14px;
+        }
+
+        .form-control {
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 20px;
+            background-color: #1da1f2;
+            color: #ffffff;
+            border: none;
+        }
+
+            .btn-login:hover {
+                background-color: #1a91da;
+            }
+
+        .text-muted {
+            color: #657786;
+        }
+
+        .footer-link {
+            color: #1da1f2;
+            text-decoration: none;
+        }
+
+            .footer-link:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-title">Đăng nhập vào FBWA</div>
+
+        <form asp-action="Login" method="post">
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Mật khẩu</label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-login">Đăng nhập</button>
+        </form>
+
+        <div class="mt-4">
+            <p class="text-muted">Chưa có tài khoản? <a href="/Account/Register" class="footer-link">Đăng ký</a></p>
+        </div>
+    </div>
+</body>
+</html>
