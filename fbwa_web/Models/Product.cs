@@ -1,4 +1,6 @@
-﻿namespace fbwa_web.Models
+﻿using System;
+
+namespace fbwa_web.Models
 {
     public class Product
     {
@@ -10,5 +12,9 @@
         public string SKU { get; set; } = string.Empty;
         public DateTime DateAdded { get; set; } = DateTime.Now;
         public bool IsActive { get; set; } = true;
+
+        // Liên kết với Category
+        public int CategoryID { get; set; }
+        public Category? Category { get; set; } // Nullable để tránh lỗi khi không có danh mục liên kết
     }
 }

@@ -1,8 +1,74 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<fbwa_web.Models.CategoryProductViewModel>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title - Home</title>
+    <link rel="stylesheet" href="~/css/home.css">
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="header">
+        <div class="top-banner">
+            <span>Thu cũ giá ngon - Lên đời tiết kiệm</span>
+            <span>Tải App Smember - Tích điểm & nhận ưu đãi</span>
+        </div>
+        <div class="main-nav">
+            <img src="~/images/logo.png" alt="Logo" class="logo">
+            <div class="search-bar">
+                <input type="text" placeholder="Bạn cần tìm gì?">
+            </div>
+            <div class="nav-icons">
+                <a href="#">Gọi mua hàng</a>
+                <a href="#">Cửa hàng gần bạn</a>
+                <a href="#">Tra cứu đơn hàng</a>
+                <a href="#">Giỏ hàng</a>
+                <a href="#">Hùng</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Carousel Section -->
+    <div class="carousel">
+        <div class="slides">
+            <div class="slide"><img src="~/images/banner1.jpg" alt="Banner 1"></div>
+            <div class="slide"><img src="~/images/banner2.jpg" alt="Banner 2"></div>
+            <div class="slide"><img src="~/images/banner3.jpg" alt="Banner 3"></div>
+        </div>
+    </div>
+
+    <!-- Product Categories -->
+    <main>
+        <h1>Danh mục sản phẩm</h1>
+        @foreach (var categoryData in Model)
+        {
+            <div class="category-section">
+                <h2>@categoryData.ParentCategory.CategoryName</h2>
+                @foreach (var subCategoryData in categoryData.SubCategories)
+                {
+                    <div class="subcategory-section">
+                        <h3>@subCategoryData.SubCategory.CategoryName</h3>
+                        <div class="product-list">
+                            @foreach (var product in subCategoryData.Products)
+                            {
+                                <div class="product-item">
+                                    <h4>@product.ProductName</h4>
+                                    <p>@product.Description</p>
+                                    <p>Giá: @product.Price.ToString("C")</p>
+                                </div>
+                            }
+                        </div>
+                        @if (subCategoryData.Products.Count > 5)
+                        {
+                            <a href="@Url.Action("ViewAllProducts", "Home", new { categoryId = subCategoryData.SubCategory.CategoryID })" class="btn btn-primary">Xem thêm</a>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </main>
+
+    <script src="~/js/home.js"></script>
+</body>
+</html>
